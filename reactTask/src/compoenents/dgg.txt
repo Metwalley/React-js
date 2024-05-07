@@ -1,0 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package flash;
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ *
+ * @author Abdulrahman Mohamed Farag
+ */
+public class flash extends JFrame{
+    private boolean isAppearing = false;
+    private Timer timer;
+
+    public flash() {
+        setTitle("ABDUL-RHMAN");
+        setSize(400, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Create a timer to toggle the appearance of the cycle
+        timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isAppearing = !isAppearing; // Toggle the appearance state
+                repaint(); // Request the component to be repainted
+            }
+        });
+        timer.start(); // Start the timer
+
+        setVisible(true);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+
+        if (isAppearing) {
+            // Draw a filled circle (cycle) in the center of the frame
+            int centerX = getWidth() / 2;
+            int centerY = getHeight() / 2;
+            int diameter = Math.min(getWidth(), getHeight()) / 2;
+            g.setColor(Color.RED);
+            g.fillOval(centerX - diameter / 2, centerY - diameter / 2, diameter, diameter);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        new flash();
+
+    }
+}
